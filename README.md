@@ -6,7 +6,7 @@ In this project, you will build a webapp where users can vote for their favorite
 
 In contrast to previous projects, instead of implementing a pre-defined spec you will be imitating an existing site: http://media-ranker-2-0.herokuapp.com. Your job is to match the functionality and styling of this site as closely as possible.
 
-This is an individual, [stage 2](https://github.com/Ada-Developers-Academy/pedagogy/blob/master/rule-of-three.md) project.
+This is an individual, [stage 2](https://github.com/Ada-Developers-Academy/pedagogy/blob/master/rule-of-three.md) project, due before class Monday April 29.
 
 ## Learning Goals
 
