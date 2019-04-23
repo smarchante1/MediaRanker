@@ -42,7 +42,13 @@ class WorksController < ApplicationController
   end
 
   def update
-
+    if @work.update(work_params)
+      flash[:success] = "Successfully updated #{@work.title}"
+      redirect_to work_path(@work.id)
+    else
+      flash.now[:error] = "Unable to complete your update"
+      render(:edit, status: :bad_request)
+    end
 
   end
 
