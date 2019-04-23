@@ -22,14 +22,23 @@ class WorksController < ApplicationController
     is_successful = @work.save
 
     if is_successful
+      flash[:success] = "#{@work.title} was successfully created."
       redirect_to work_path(@work.id)
     else
+      flash.now[:failure] = "Unable to create #{@work.category}"
+      @work.errors.messages.each do |field, messages|
+        flash.now[field] = messages
+      end
       render :new, status: :bad_request
     end
   end
 
   def edit
+    @work = Work.find_by(id: params[:id])
 
+    unless @work
+      head :not_found
+    end
   end
 
   def update
