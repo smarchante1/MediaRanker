@@ -1,15 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  creator: MyString
-  category: MyString
-  description: MyString
-  pub_year: 1
+book:
+  title: Lost Roses
+  creator: Martha hall Kelly
+  category: Historical Fiction
+  description: follows three girls during WWI.
+  pub_year: 1994
 
-two:
-  title: MyString
-  creator: MyString
-  category: MyString
-  description: MyString
-  pub_year: 1
+album:
+  title: The Emancipation of Mimi
+  creator: Mariah Carey
+  category: R&B
+  description: I know every lyric of every song on this album.
+  pub_year: 1995
+
