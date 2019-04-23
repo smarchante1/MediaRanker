@@ -53,7 +53,16 @@ class WorksController < ApplicationController
   end
 
   def destroy
+    work = Work.find_by(id: params[:id])
 
+    if !work
+      flash[:failure] = "Unable to delete the specified media."
+      redirect_to root_path
+    else
+      work.destroy
+      flash[:success] = "Success! #{work.title} is now deleted."
+      redirect_to works_path
+    end
 
   end
 
