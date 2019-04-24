@@ -36,7 +36,7 @@ describe WorksController do
     end
   end
 
-  describe "create" do
+  describe "create action" do
     it "successfully creates a new media" do 
       media_params = {
         "work": {
@@ -56,6 +56,46 @@ describe WorksController do
       new_media = Work.find_by(title: media_params[:work][:title])
       expect(flash[:success]).must_equal  "#{new_media.title} was successfully created."
       must_redirect_to work_path(new_media.id)
+    end
+
+    it "will give a 404 for bad parameters" do
+      media_params = {
+        "work": {
+          category: "book",
+          title: "",
+          creator: "George Orwell",
+          pub_year: 1948,
+          description: "A startling and haunting vision of the world, 1984 is so powerful that it is completely convincing from start to finish"
+        }
+      }
+
+      expect {
+        post works_path, params: media_params
+      }.wont_change "Work.count" 
+
+      must_respond_with :bad_request
+    end
+
+
+    describe "edit action" do
+      it "can edit existing media" do
+        get edit_work_path(work.id)
+
+        must_respond_with :success
+      end
+
+      it "will return 404 for invalid work id" do
+        get edit_work_path(-1)
+
+        must_respond_with :not_found
+      end
+    end
+
+    describe "update action" do
+
+
+
+
     end
   end
 end
