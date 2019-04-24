@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>Votes</th>
+    <th>Title</th>
+    <th>Created by</th>
+    <th>Published</th>
+    <th>Upvote</th>
+  </tr>
+
+  <% works.each do |work| %>
+    <td>
+      Votes
+    </td>
+
+    <td>
+      <%= link_to "#{work.title}", work_path(work.id) %>
+    </td>
+
+  <% end %>
+
+
+</table>
