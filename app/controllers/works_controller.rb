@@ -15,11 +15,11 @@ class WorksController < ApplicationController
   end
 
   def new
-    @work = Works.new
+    @work = Work.new
   end
 
   def create
-    @work = Works.new(work_params)
+    @work = Work.new(work_params)
 
     is_successful = @work.save
 

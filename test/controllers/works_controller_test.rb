@@ -29,7 +29,6 @@ describe WorksController do
   end
 
   describe "new" do
-    it ""
 
 
   end
