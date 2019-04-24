@@ -1,2 +1,2 @@
-class HomepageController < ApplicationController
+class HomepagesController < ApplicationController
 end
