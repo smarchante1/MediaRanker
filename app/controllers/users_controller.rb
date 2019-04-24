@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     user = User.find_by(username: username)
 
     if user 
-      session[:user_id] = @user.id
+      session[:user_id] = user.id
       flash[:success] = "Welcome back, #{username}."
       redirect_to root_path
     else

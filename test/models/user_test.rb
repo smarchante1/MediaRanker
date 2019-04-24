@@ -1,9 +1,10 @@
 require "test_helper"
 
 describe User do
-  let(:user) { User.new }
+  let(:user) { users(:two)}
 
   it "must be valid" do
-    value(user).must_be :valid?
+    is_valid = user.valid?
+    value(is_valid).must_equal true
   end
 end
