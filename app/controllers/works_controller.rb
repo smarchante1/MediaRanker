@@ -44,6 +44,8 @@ class WorksController < ApplicationController
   end
 
   def update
+    @work = Work.find_by(id: params[:id])
+
     if @work.update(work_params)
       flash[:success] = "Successfully updated #{@work.title}"
       redirect_to work_path(@work.id)

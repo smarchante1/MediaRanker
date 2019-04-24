@@ -92,10 +92,33 @@ describe WorksController do
     end
 
     describe "update action" do
+      it "can update an existing work" do
+        media_params = {
+          work: {
+            category: "album",
+            title: "Electric Gypsy",
+            creator: "Andy Timmons",
+            publication_year: 1994,
+            description: "All the college feels.",
+          },
+        }
 
+        expect {
+          patch work_path(work_2.id), params: media_params
+        }.wont_change "Work.count"
 
+        must_respond_with :redirect
+        work_2.reload
+        expect(flash[:success]).must_equal "Successfully updated #{work_2.title}"
+      end
 
+      # USE LET FOR THIS TEST
+      # it "returns 404 for invalid  work" do
+ 
+      #   patch work_path(-1)
 
+      #   must_respond_with :not_found
+      # end
     end
   end
 end
