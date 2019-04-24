@@ -8,12 +8,37 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <header>
-  <h1>Media Ranker</h1>
-  </header>
    
   <body>
+    <header>
+      <h1>
+      Media Ranker | <span> Ranking the Best of Everything </span>
+      </h1>
+    
+    <nav>
+      <ul>
+        <li><%= link_to "View top media", root_path %></li>
+        <li><%= link_to "View all media", works_path %></li>
+        <li><%= link_to "Add a new work", new_work_path %></li>
+        <%# add link to see all users%>
+      </ul>
+    </nav>
+
+    <section>
+      <% if session[:user_id] %>
+        <%= link_to "Logged in as #{User.find(session[:user_id]).username}", current_user_path %>
+        <%= button_to "Log out", logout_path(session[:user_id]), class: "btn btn-primary", method: :post %>
+      <% else %>
+        <%= link_to "Log in", login_path, class: "btn btn-primary"  %>
+      <% end %>
+    </section>
+        
+
+    </header>
+
+
     <%= yield %>
   </body>
 </html>
+
+
