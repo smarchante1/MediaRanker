@@ -3,13 +3,17 @@
 <h3>Albums</h3>
 
 <section>
-  <%= render partial: 'media_table', locals: { :works => @albums, :title_name => "Albums" } %>
+  <%= render partial: 'media_table', locals: { :works => @albums } %>
 </section>
 
-<section>
-  <%= render partial: 'media_table', locals: { :works => @books, :title_name => "Books" } %>
-</section>
+<h3>Books</h3>
 
 <section>
-  <%= render partial: 'media_table', locals: { :works => @movies, :title_name => "Movies" } %>
+  <%= render partial: 'media_table', locals: { :works => @books} %>
+</section>
+
+<h3>Movies</h3>
+
+<section>
+  <%= render partial: 'media_table', locals: { :works => @movies} %>
 </section>
