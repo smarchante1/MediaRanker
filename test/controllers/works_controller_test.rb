@@ -120,5 +120,27 @@ describe WorksController do
       #   must_respond_with :not_found
       # end
     end
+
+    describe "destroy action" do
+      it "can delete a work" do
+        expect {
+          delete work_path(work.id)
+        }.must_change "Work.count", -1
+  
+        must_respond_with :redirect
+        must_redirect_to works_path
+        expect(flash[:success]).must_equal  "Success! #{work.title} is now deleted."
+      end
+
+      it "redirects to thee root path for invalid work" do
+        expect {
+          delete work_path(-1)
+        }.wont_change "Work.count"
+  
+        must_respond_with :redirect
+        must_redirect_to root_path
+        expect(flash[:failure]).must_equal "Unable to delete the specified media."
+      end
+    end
   end
 end
