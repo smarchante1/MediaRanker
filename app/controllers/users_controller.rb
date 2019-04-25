@@ -10,25 +10,26 @@ class UsersController < ApplicationController
     if user 
       session[:user_id] = user.id
       flash[:success] = "Welcome back, #{username}."
-      redirect_to root_path
     else
       user = User.create(username: username)
       session[:user_id] = user.id
       flash[:success] = "Welcome new user, #{user.username}."
-      redirect_to root_path
     end
+    redirect_to root_path
   end
 
   def current
     @user = User.find_by(id: session[:user_id])
-    unless @user
-      flash[:error] = "You must be logged in to see this page"
+    if @user.nil?
+      flash[:error] = "You must be logged in first!"
       redirect_to root_path
     end
   end
 
-  def log_out
+  def logout
+    user = User.find_by(id: session[:user_id])
     session[:user_id] = nil
+    flash[:notice] = "Logged out #{user.username}"
     redirect_to root_path
   end
 end
