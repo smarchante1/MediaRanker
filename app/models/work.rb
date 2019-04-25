@@ -4,4 +4,8 @@ class Work < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :creator, :category, :description, :pub_year, presence: true
 
+  def top_work
+
+
+  end
 end
