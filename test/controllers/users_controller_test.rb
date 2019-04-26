@@ -28,14 +28,14 @@ describe UsersController do
 
   describe "vote action" do
     before do
-      @work = works(:album_1)
+      @work = works(:album_2)
       @user = perform_login
     end
   
     it "user can vote when logged in & voting for the first time" do
       perform_login
 
-      work_1 = works(:book_5)
+      work_1 = works(:album_2)
   
       post vote_path(work_1.id)
 

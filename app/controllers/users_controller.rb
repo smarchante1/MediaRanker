@@ -22,8 +22,8 @@ class UsersController < ApplicationController
   end
 
   def current
-    @user = User.find_by(id: session[:user_id])
-    unless @user
+    @current_user = User.find_by(id: session[:user_id])
+    unless @current_user
       flash[:error] = "You must be logged in to see this page"
       redirect_to root_path
     end
@@ -35,18 +35,20 @@ class UsersController < ApplicationController
   end
 
   def vote
-    @work = Work.find_by(id: params[:id])
+    if @user
+      @work = Work.find_by(id: params[:id])
 
-    if @user.nil?
-      flash[:error] = "You must be logged in to vote."
-      redirect_to root_path
-    elsif @user.voted_for? @work
-      flash[:error] = "You cannot vote more than once."
-      redirect_to works_path
+      if @user.voted_for? @work
+        flash[:warning] = "Cannot upvote the same media twice."
+      else
+        flash[:success] = "Successfully voted for #{@work.title}"
+        redirect_to work_path(@work.id)
+      end
+
     else
-      @work.upvote_by @user
-      redirect_to work_path(@work.id)
+      flash[:danger] = "Must be logged in to vote!"
     end
+    redirect_back(fallback_location: root_path)
 
   end
 end
