@@ -25,9 +25,7 @@ describe Work do
       work.upvote_by user
       expect(work.cached_votes_total).must_equal 1
       expect(user.voted_for?(work)).must_equal true
-
     end
-
 
   end
 end
