@@ -13,7 +13,7 @@ class Work < ApplicationRecord
   end
 
   def self.top_work
-    # top_work = Work.sort_by(&:"#{cached_votes_total}")
+    top_work = Work.order(cached_votes_total: :desc).first
     top_work
   end
 

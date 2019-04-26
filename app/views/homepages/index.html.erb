@@ -1,1 +1,10 @@
+<section class="spotlight">
+  <% top_work = Work.top_work %>
+  <h2 class="spotlight_header">
+    Media Spotlight: <%= link_to top_work.title, work_path(top_work.id), class:"spotlight_link" %> by <%= top_work.creator %>
+  </h2>
+    <p class="spotlight_description"> <%= top_work.cached_votes_total %> votes. <%= top_work.description %> </p>
+</section>
+
+
 <h2>This definitely works</h2>
