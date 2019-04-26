@@ -26,7 +26,7 @@ describe UsersController do
   end
 
 
-  describe "vote action" do
+  describe "upvote action" do
     before do
       @work = works(:album_2)
       @user = perform_login
@@ -37,7 +37,7 @@ describe UsersController do
 
       work_1 = works(:album_2)
   
-      post vote_path(work_1.id)
+      post upvote_path(work_1.id)
 
       expect(
         work_1.cached_votes_total

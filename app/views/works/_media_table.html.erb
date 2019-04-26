@@ -10,7 +10,7 @@
   <% works.each do |work| %>
   <tr>
     <td>
-       <%= work.get_upvotes.size %>
+       <%= work.cached_votes_total %>
     </td>
 
     <td>
@@ -26,7 +26,7 @@
     </td>
 
     <td> 
-      <%= link_to "Upvote", vote_path(work.id), method: :post, class: "btn btn-primary" %> 
+      <%= link_to "Upvote", upvote_path(work.id), method: :post, class: "btn btn-primary" %> 
     </td>
   </tr>
   <% end %>

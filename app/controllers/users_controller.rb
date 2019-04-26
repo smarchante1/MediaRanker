@@ -1,4 +1,3 @@
-require "pry"
 
 class UsersController < ApplicationController
   def login_form
@@ -34,13 +33,14 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def vote
-    if @user
+  def upvote
+    if @current_user
       @work = Work.find_by(id: params[:id])
 
-      if @user.voted_for? @work
+      if @current_user.voted_for? @work
         flash[:warning] = "Cannot upvote the same media twice."
       else
+        @work.upvote_by @current_user
         flash[:success] = "Successfully voted for #{@work.title}"
         redirect_to work_path(@work.id)
       end
