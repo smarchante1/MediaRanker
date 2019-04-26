@@ -26,6 +26,13 @@ describe Work do
       expect(work.cached_votes_total).must_equal 1
       expect(user.voted_for?(work)).must_equal true
     end
+  end
+
+  describe "top ten categories" do
+    it 'will return up to 10 works (if no works have upvotes, will return 10 works)' do
+      works = Work.top_ten_categories('album')
+      expect(works.length).must_equal 10
+    end
 
   end
 end

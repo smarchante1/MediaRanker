@@ -6,16 +6,15 @@ class Work < ApplicationRecord
     return list = Work.where(category: category)
   end
 
-  def top_ten_categories
-    works = self.works_categories(category)
-    works = works.sort_by {|work| work.order(:cached_votes_total => :desc) }.reverse!
+  def self.top_ten_categories(category)
+    works = Work.where(category: category).where.not(cached_votes_total: 0).order(title: :asc)
+    works = works.sort_by {|work| work.votes_for.size }.reverse!
     return works[0..9]
   end
 
-  def self.spotlight
-    
-  
-
+  def self.top_work
+    # top_work = Work.sort_by(&:"#{cached_votes_total}")
+    top_work
   end
 
 

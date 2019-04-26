@@ -72,6 +72,28 @@ describe UsersController do
       ).must_equal 1
   
     end
+
+    it "user must be logged in before voting" do
+      work_1 = works(:album_2)
+
+      post upvote_path(work_1.id)
+
+      # expect(flash.now[:danger]).must_equal "Must be logged in to vote!"
+      must_respond_with :redirect
+    end
+
+    it "user can only vote" do
+      perform_login
+
+      work_1 = works(:album_2)
+      post upvote_path(work_1.id)
+      must_respond_with :found
+
+      post upvote_path(work_1.id)
+
+      expect(flash[:warning]).must_equal "Cannot upvote the same media twice."
+      # must_respond_with :redirect
+    end
   end
   
 

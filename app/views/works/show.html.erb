@@ -13,4 +13,4 @@
   <%= link_to "Delete", work_path(@work.id), class: "btn btn-danger", method: :delete %>
 </div>
 
-<%# Add a line to tell how many votes for this "category"%>
+<%= @work.cached_votes_total%> votes for this <%= @work.category %> 

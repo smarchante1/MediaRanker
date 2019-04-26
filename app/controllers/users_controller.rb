@@ -49,6 +49,7 @@ class UsersController < ApplicationController
 
     else
       flash[:danger] = "Must be logged in to vote!"
+      redirect_to works_path
     end
     # redirect_back(fallback_location: root_path)
 
