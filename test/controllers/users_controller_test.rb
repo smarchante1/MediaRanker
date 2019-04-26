@@ -39,9 +39,9 @@ describe UsersController do
   
       post vote_path(work_1.id)
 
-      expect {
+      expect(
         work_1.cached_votes_total
-      }.must_equal 1
+      ).must_equal 1
   
     end
   end
