@@ -1,3 +1,4 @@
+
 class UsersController < ApplicationController
   def login_form
     @user = User.new
@@ -19,17 +20,35 @@ class UsersController < ApplicationController
   end
 
   def current
-    @user = User.find_by(id: session[:user_id])
-    if @user.nil?
-      flash[:error] = "You must be logged in first!"
+    @current_user = User.find_by(id: session[:user_id])
+    unless @current_user
+      flash[:error] = "You must be logged in to see this page"
       redirect_to root_path
     end
   end
 
   def logout
-    user = User.find_by(id: session[:user_id])
     session[:user_id] = nil
     flash[:notice] = "Logged out #{user.username}"
     redirect_to root_path
+  end
+
+  def upvote
+    if @current_user
+      @work = Work.find_by(id: params[:id])
+
+      if @current_user.voted_for? @work
+        flash[:warning] = "Cannot upvote the same media twice."
+      else
+        @work.upvote_by @current_user
+        flash[:success] = "Successfully voted for #{@work.title}"
+        redirect_to work_path(@work.id)
+      end
+
+    else
+      flash[:danger] = "Must be logged in to vote!"
+    end
+    redirect_back(fallback_location: root_path)
+
   end
 end

@@ -1,7 +1,8 @@
 require "test_helper"
 
 describe Work do
-  let(:work) { works(:album) }
+  let(:work) { works(:album_1) }
+  let(:user) { users(:one) }
 
   it "must be valid" do
     value(work).must_be :valid?
@@ -17,15 +18,15 @@ describe Work do
       expect(work.errors.messages).must_include :title
       expect(work.errors.messages[:title]).must_equal ["can't be blank"]
     end
+  end
 
-    it "must have a unique title" do
-      identical_title = Work.new(title: "Lost Roses", creator: "Lemony Snickett")
-
-      expect(identical_title.save).must_equal false
-
-      expect(identical_title.errors.messages).must_include :title
-      expect(identical_title.errors.messages[:title]).must_equal ["has already been taken"]
+  describe "relationships" do
+    it "takes votes" do
+      work.upvote_by user
+      expect(work.cached_votes_total).must_equal 1
+      expect(user.voted_for?(work)).must_equal true
     end
+
   end
 end
 

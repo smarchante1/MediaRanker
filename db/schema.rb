@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_24_053614) do
+ActiveRecord::Schema.define(version: 2019_04_26_044318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,14 +21,20 @@ ActiveRecord::Schema.define(version: 2019_04_24_053614) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "votes", force: :cascade do |t|
-    t.date "vote_date"
+  create_table "votes", id: :serial, force: :cascade do |t|
+    t.string "votable_type"
+    t.integer "votable_id"
+    t.string "voter_type"
+    t.integer "voter_id"
+    t.boolean "vote_flag"
+    t.string "vote_scope"
+    t.integer "vote_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "work_id"
-    t.index ["user_id"], name: "index_votes_on_user_id"
-    t.index ["work_id"], name: "index_votes_on_work_id"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+    t.index ["voter_type", "voter_id"], name: "index_votes_on_voter_type_and_voter_id"
   end
 
   create_table "works", force: :cascade do |t|
@@ -39,8 +45,12 @@ ActiveRecord::Schema.define(version: 2019_04_24_053614) do
     t.integer "pub_year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.index ["cached_votes_down"], name: "index_works_on_cached_votes_down"
+    t.index ["cached_votes_total"], name: "index_works_on_cached_votes_total"
+    t.index ["cached_votes_up"], name: "index_works_on_cached_votes_up"
   end
 
-  add_foreign_key "votes", "users"
-  add_foreign_key "votes", "works"
 end
