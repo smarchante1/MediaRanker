@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   def logout
     session[:user_id] = nil
-    flash[:notice] = "Logged out #{user.username}"
+    # flash[:notice] = "Logged out #{current_user.username}"
     redirect_to root_path
   end
 
