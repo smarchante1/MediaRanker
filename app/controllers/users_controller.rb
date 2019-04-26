@@ -1,3 +1,5 @@
+require "pry"
+
 class UsersController < ApplicationController
   def login_form
     @user = User.new
@@ -27,13 +29,24 @@ class UsersController < ApplicationController
     end
   end
 
-  def log_out
+  def logout
     session[:user_id] = nil
     redirect_to root_path
   end
 
   def vote
+    @work = Work.find_by(id: params[:id])
 
+    if @user.nil?
+      flash[:error] = "You must be logged in to vote."
+      redirect_to root_path
+    elsif @user.voted_for? @work
+      flash[:error] = "You cannot vote more than once."
+      redirect_to works_path
+    else
+      @work.upvote_by @user
+      redirect_to work_path(@work.id)
+    end
 
   end
 end

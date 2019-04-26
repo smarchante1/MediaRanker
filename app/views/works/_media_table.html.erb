@@ -10,7 +10,7 @@
   <% works.each do |work| %>
   <tr>
     <td>
-      Votes
+       <%= work.get_upvotes.size %>
     </td>
 
     <td>
@@ -26,7 +26,7 @@
     </td>
 
     <td> 
-      <%= button_to "Upvote", "#"%>
+      <%= link_to "Upvote", vote_path(work.id), method: :post, class: "btn btn-primary" %> 
     </td>
   </tr>
   <% end %>

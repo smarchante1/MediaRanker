@@ -25,4 +25,26 @@ describe UsersController do
     end
   end
 
+
+  describe "vote action" do
+    before do
+      @work = works(:album_1)
+      @user = perform_login
+    end
+  
+    it "user can vote when logged in & voting for the first time" do
+      perform_login
+
+      work_1 = works(:book_5)
+  
+      post vote_path(work_1.id)
+
+      expect {
+        work_1.cached_votes_total
+      }.must_equal 1
+  
+    end
+  end
+  
+
 end

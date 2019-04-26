@@ -18,14 +18,14 @@ describe Work do
       expect(work.errors.messages[:title]).must_equal ["can't be blank"]
     end
 
-    it "must have a unique title" do
-      identical_title = Work.new(title: "Lost Roses", creator: "Lemony Snickett")
+    # it "must have a unique title" do
+    #   identical_title = Work.new(title: "Lost Roses", creator: "Lemony Snickett")
 
-      expect(identical_title.save).must_equal false
+    #   expect(identical_title.save).must_equal false
 
-      expect(identical_title.errors.messages).must_include :title
-      expect(identical_title.errors.messages[:title]).must_equal ["has already been taken"]
-    end
+    #   expect(identical_title.errors.messages).must_include :title
+    #   expect(identical_title.errors.messages[:title]).must_equal ["has already been taken"]
+    # end
   end
 end
 
