@@ -31,7 +31,7 @@ describe Work do
   end
 
   describe "top ten categories" do
-    it "will return works with upvotes " do
+    it "will return works with votes " do
       works = Work.top_ten_categories('album')
       expect(works.length).must_equal 5
     end

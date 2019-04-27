@@ -4,7 +4,7 @@
     <th>Title</th>
     <th>Created by</th>
     <th>Published</th>
-    <th>Upvote</th>
+    <th>vote</th>
   </tr>
 
   <% works.each do |work| %>
@@ -26,7 +26,7 @@
     </td>
 
     <td> 
-      <%= link_to "Upvote", upvote_path(work.id), method: :post, class: "btn btn-primary" %> 
+      <%= link_to "vote", upvote_path(work.id), method: :post, class: "btn btn-primary" %> 
     </td>
   </tr>
   <% end %>
