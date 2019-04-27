@@ -15,23 +15,7 @@
       <a class="logo"> Media Ranker</a>
       <small class="tagline"> Ranking the Best of Everything</small>
       </h1>
-       <% if flash.count > 0 %>
-          <section class="flash">
-            <div class="alert">
-            <% flash.each do |name, message| %>
-              <% if message.class == Array %>
-                <ul>
-                <% message.each do |msg| %>
-                  <li><%= name %>: <%= msg %> </li>
-                <% end %>
-              <% else %>
-                <%= message %>
-              <% end %>
-              </ul>
-            <% end %>
-            </div>
-          </section>
-        <% end %>
+  
         
     <nav class="nav-menu">
       <ul class="nav-container">
@@ -53,7 +37,26 @@
 
     </header>
 
-
+   <section class="alert-container">
+   <% if flash.count > 0 %>
+        <section class="flash">
+          <div class="alert">
+          <% flash.each do |name, message| %>
+            <% if message.class == Array %>
+              <ul>
+              <% message.each do |msg| %>
+                <li><%= name %>: <%= msg %> </li>
+              <% end %>
+            <% else %>
+              <%= message %>
+            <% end %>
+              </ul>
+          <% end %>
+          </div>
+        </section>
+    <% end %>
+  </section>
+  
     <%= yield %>
   </body>
 </html>

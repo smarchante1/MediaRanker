@@ -6,24 +6,28 @@
 /* Import scss content */
 // @import "**/*";
 
+main {
+  padding: 2rem;
+}
+
 .media_main_head {
-    max-width: 100%;
-    background-color: #B2DFDB;
-    margin-bottom: 0.5rem;
-    padding: 2rem 1rem 0.5rem 1rem;
+  max-width: 100%;
+  background-color: #B2DFDB;
+  margin-bottom: 0.5rem;
+  padding: 2rem 1rem 0.5rem 1rem;
 }
 
 .media_main_head a.logo {
-    color: #FF5722;
-    padding-right: 25px;
-    margin-right: 15px;
-    border-right: white 2px solid;
+  color: #FF5722;
+  padding-right: 25px;
+  margin-right: 15px;
+  border-right: white 2px solid;
 }
 
 .media_main_head h1 small.tagline{
-    color: white;
-    padding-right: 25px;
-    margin-right: 15px;
+  color: white;
+  padding-right: 25px;
+  margin-right: 15px;
 }
 
 .nav-container {
@@ -39,6 +43,25 @@
   color: #00796B;
 }
 
+.table td {
+  vertical-align: middle;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.alert-container {
+  margin: 2rem 0 1rem 0;
+}
+
+.alert{
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
 a:hover {
   color: #00796B;
   text-decoration: none;
@@ -54,4 +77,14 @@ h1, h2, h3, h4, h5 {
 
 a, h2, h3 {
   color: #26A69A;
+}
+
+.btn:hover {
+  background-color: #00796B;
+}
+
+.btn-primary {
+  background-color: #26A69A;
+  color: white;
+  border-color: #26A69A;
 }
