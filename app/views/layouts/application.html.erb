@@ -11,7 +11,7 @@
    
   <body>
     <header class="media_main_head">
-      <h1> 
+      <h1 class="main-title"> 
       <a class="logo"> Media Ranker</a>
       <small class="tagline"> Ranking the Best of Everything</small>
       </h1>
@@ -24,16 +24,18 @@
         <li class="nav-item"><%= link_to "Add a new work", new_work_path %></li>
         <li class="nav-item">View all users</li>
       </ul>
-    </nav>
 
-    <section>
-      <% if session[:user_id] %>
-        <%= link_to "Logged in as #{User.find(session[:user_id]).username}", current_user_path %>
-        <%= button_to "Log out", logout_path(session[:user_id]), class: "btn btn-primary", method: :post %>
-      <% else %>
-        <%= link_to "Log in", login_path, class: "btn btn-primary"  %>
-      <% end %>
-    </section>
+      <ul>
+        <div class="login-button">
+          <% if session[:user_id] %>
+            <%= link_to "Logged in as #{User.find(session[:user_id]).username}", current_user_path %>
+            <%= button_to "Log out", logout_path(session[:user_id]), class: "btn btn-primary", method: :post %>
+          <% else %>
+            <%= link_to "Log in", login_path, class: "btn btn-primary"  %>
+          <% end %>
+        </div>
+      </ul>
+    </nav>
 
     </header>
 
@@ -56,7 +58,7 @@
         </section>
     <% end %>
   </section>
-  
+
     <%= yield %>
   </body>
 </html>

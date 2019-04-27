@@ -2,9 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import "bootstrap";
-/* Import scss content */
-// @import "**/*";
+body, h1, h2, h3, h4, h5 {
+    font-family: "Gudea", sans-serif;
+}
 
 main {
   padding: 2rem;
@@ -15,6 +15,11 @@ main {
   background-color: #B2DFDB;
   margin-bottom: 0.5rem;
   padding: 2rem 1rem 0.5rem 1rem;
+}
+
+.main-title {
+  text-align: center;
+  margin: 25px auto 40px auto;
 }
 
 .media_main_head a.logo {
@@ -30,11 +35,21 @@ main {
   margin-right: 15px;
 }
 
+.nav-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+}
+
 .nav-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   list-style: none;
+}
+
+.login-button {
+  display: flex;
 }
 
 .nav-item {
@@ -77,6 +92,12 @@ h1, h2, h3, h4, h5 {
 
 a, h2, h3 {
   color: #26A69A;
+}
+
+p {
+  display: block; 
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .btn:hover {
