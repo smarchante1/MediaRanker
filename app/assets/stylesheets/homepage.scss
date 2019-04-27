@@ -1,3 +1,25 @@
 // Place all the styles related to the homepage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap";
+
+.media_main_head{
+    max-width: 100%;
+    background-color: #B2DFDB;
+    margin-bottom: 0.5rem;
+    padding: 2rem 1rem 0.5rem 1rem;
+}
+
+.media_main_head h1 a{
+    color: #FF5722;
+    padding-right: 25px;
+    margin-right: 15px;
+    border-right: white 2px solid;
+}
+
+.media_main_head h1 small.tagline{
+    color: #FF5722;
+    padding-right: 25px;
+    margin-right: 15px;
+}
