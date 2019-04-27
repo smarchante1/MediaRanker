@@ -7,4 +7,20 @@
 </section>
 
 
-<h2>This definitely works</h2>
+<section class="top_ten_container">
+  <% [[@books, "Books"], [@albums, "Albums"], [@movies, "Movies"]].each do |works, category| %>
+  <section class="top_ten_list_section">
+    <h2 class="top_ten_header"> Top <%= category %> </h2>
+     <% books = Work.top_ten_categories("book") %>
+     <% books.each do |book| %>
+     <ul class="list-group top_ten_list">
+       <li class="list-group-item">
+         <h4> <%= link_to "#{book.title}", work_path(book.id) %> <small class="top_ten_creator"> by <%= book.creator %></small> </h4>
+         <p><%= book.cached_votes_total %> votes</p>
+       </li>
+     </ul>
+   <% end %>
+   </section>
+ <% end %>
+</section>
+

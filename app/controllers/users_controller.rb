@@ -40,7 +40,7 @@ class UsersController < ApplicationController
       @work = Work.find_by(id: params[:id])
 
       if current_user.voted_for? @work
-        flash[:warning] = "Cannot upvote the same media twice."
+        flash.now[:warning] = "Cannot upvote the same media twice."
       else
         @work.upvote_by current_user
         flash[:success] = "Successfully voted for #{@work.title}"
