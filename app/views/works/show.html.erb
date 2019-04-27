@@ -6,12 +6,19 @@
 
 <p> <%= @work.description %> </p>
 
-<div>
+<section>
   <%= link_to "Back to media ranks", works_path, class: "btn btn-primary" %>
   <%= link_to "Edit", edit_work_path(@work.id), class: "btn btn-primary" %>
-  <%= button_to "vote", upvote_path(@work.id), method: :post, class: "btn btn-primary" %> 
-  <%= link_to "Delete", work_path(@work.id), class: "btn btn-danger", method: :delete %>
-</div>
+  <%= link_to "vote", upvote_path(@work.id), method: :post, class: "btn btn-primary" %> 
+  <%= link_to "Delete", work_path(@work.id), class: "btn btn-danger", method: :delete, data: { confirm: "You're deleting: #{@work.title}! Are you sure?" } %> 
+</section>
 
-<%= @work.cached_votes_total%> votes for this <%= @work.category %> 
+<h3 class="work-votes-header">
+  <td><%= @work.cached_votes_total%> votes for this <%= @work.category %></td>
+</h3>
 
+<% voters = @work.votes_for.includes(:voter).map do |vote|
+     { voter_name: vote.voter.username, updated_at: vote.updated_at.strftime('%b %d, %Y') }
+end %>
+
+<%= voters %>
