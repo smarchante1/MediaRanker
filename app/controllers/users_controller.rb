@@ -48,6 +48,7 @@ class UsersController < ApplicationController
       end
 
     else
+      # not working on heroku
       flash[:danger] = "Must be logged in to vote!"
       redirect_to works_path
     end

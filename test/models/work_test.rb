@@ -2,6 +2,7 @@ require "test_helper"
 
 describe Work do
   let(:work) { works(:album_1) }
+  let(:work_2) { works(:album_4) }
   let(:user) { users(:one) }
 
   it "must be valid" do
@@ -29,9 +30,18 @@ describe Work do
   end
 
   describe "top ten categories" do
-    it "will return top ten works  " do
+    it "will return top ten works " do
       works = Work.top_ten_categories('album')
       expect(works.length).must_equal 10
+    end
+
+  end
+
+  describe "top work method" do
+    it "returns work with the most votes" do
+      top_work = Work.top_work
+
+      expect(top_work).must_equal(work_2)
     end
 
   end
