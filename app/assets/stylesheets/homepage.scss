@@ -3,15 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "bootstrap";
+/* Import scss content */
+// @import "**/*";
 
-.media_main_head{
+.media_main_head {
     max-width: 100%;
     background-color: #B2DFDB;
     margin-bottom: 0.5rem;
     padding: 2rem 1rem 0.5rem 1rem;
 }
 
-.media_main_head h1 a{
+.media_main_head a.logo {
     color: #FF5722;
     padding-right: 25px;
     margin-right: 15px;
@@ -19,7 +21,37 @@
 }
 
 .media_main_head h1 small.tagline{
-    color: #FF5722;
+    color: white;
     padding-right: 25px;
     margin-right: 15px;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.nav-item {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  color: #00796B;
+}
+
+a:hover {
+  color: #00796B;
+  text-decoration: none;
+}
+
+body, h1, h2, h3, h4, h5 {
+  font-family: "Gudea", sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: bold;
+}
+
+a, h2, h3 {
+  color: #26A69A;
 }
