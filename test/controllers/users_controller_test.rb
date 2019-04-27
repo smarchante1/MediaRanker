@@ -78,11 +78,11 @@ describe UsersController do
 
       post upvote_path(work_1.id)
 
-      # expect(flash.now[:danger]).must_equal "Must be logged in to vote!"
+      expect(flash[:message]).must_equal "Must be logged in to vote!"
       must_respond_with :redirect
     end
 
-    it "user can only vote" do
+    it "user can only vote once" do
       perform_login
 
       work_1 = works(:album_2)
@@ -91,8 +91,8 @@ describe UsersController do
 
       post upvote_path(work_1.id)
 
-      expect(flash[:warning]).must_equal "Cannot upvote the same media twice."
-      # must_respond_with :redirect
+      expect(flash[:error]).must_equal "Cannot upvote the same media twice."
+      must_respond_with :redirect
     end
   end
   

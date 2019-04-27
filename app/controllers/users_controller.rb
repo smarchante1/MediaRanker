@@ -22,37 +22,39 @@ class UsersController < ApplicationController
   def current
     @current_user = User.find_by(id: session[:user_id])
     unless @current_user
-      flash.now[:error] = "You must be logged in to see this page"
+      flash.now[:error] = "You must be logged in to do that."
       redirect_to root_path
     end
   end
 
   def logout
     session[:user_id] = nil
-    # flash[:notice] = "Logged out #{current_user.username}"
+    flash[:notice] = "Logged out #{current_user.username}"
     redirect_to root_path
   end
 
   def upvote
     current_user = User.find_by(id: session[:user_id])
 
-    if current_user
-      @work = Work.find_by(id: params[:id])
-
-      if current_user.voted_for? @work
-        flash.now[:warning] = "Cannot upvote the same media twice."
-      else
-        @work.upvote_by current_user
-        flash[:success] = "Successfully voted for #{@work.title}"
-        redirect_to work_path(@work.id)
-      end
-
-    else
-      # not working on heroku
-      flash[:danger] = "Must be logged in to vote!"
+    unless current_user
+      flash[:status] = :error
+      flash[:message] = "Must be logged in to vote!"
       redirect_to works_path
+    else
+      @work = Work.find_by(id: params[:id])
+      if current_user.voted_for? @work
+      flash[:error] = "Cannot upvote the same media twice."
+      redirect_to works_path
+      else
+        if @work.upvote_by current_user
+          flash[:success] = "Successfully voted for #{@work.title}"
+          redirect_to work_path(@work.id)
+        else
+          flash[:error] = "There was an error with your vote."
+          redirect_to work_path(@work.id)
+        end
+      end
     end
-    # redirect_back(fallback_location: root_path)
 
   end
 end
