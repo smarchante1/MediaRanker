@@ -1,5 +1,7 @@
 {
   "name": "MediaRanker",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "eslint": "^5.16.0"
+  }
 }
