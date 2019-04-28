@@ -1,4 +1,6 @@
 class WorksController < ApplicationController
+  before_action :find_work, except: [:index, :new, :create]
+  
   def index
     @albums = Work.where(category: "album")
     @books = Work.where(category: "book")
@@ -6,8 +8,7 @@ class WorksController < ApplicationController
   end
 
   def show 
-    @work = Work.find_by(id: params[:id])
-
+    # @work = Work.find_by(id: params[:id])
     if @work.nil?
       flash[:failure] = "Your search returned no results."
       redirect_to root_path
@@ -36,16 +37,14 @@ class WorksController < ApplicationController
   end
 
   def edit
-    @work = Work.find_by(id: params[:id])
-
+    # @work = Work.find_by(id: params[:id])
     unless @work
       head :not_found
     end
   end
 
   def update
-    @work = Work.find_by(id: params[:id])
-
+    # @work = Work.find_by(id: params[:id])
     if @work.update(work_params)
       flash[:success] = "Successfully updated #{@work.title}"
       redirect_to work_path(@work.id)
@@ -57,14 +56,13 @@ class WorksController < ApplicationController
   end
 
   def destroy
-    work = Work.find_by(id: params[:id])
-
-    if !work
+    # work = Work.find_by(id: params[:id])
+    if !@work
       flash[:failure] = "Unable to delete the specified media."
       redirect_to root_path
     else
-      work.destroy
-      flash[:success] = "Success! #{work.title} is now deleted."
+      @work.destroy
+      flash[:success] = "Success! #{@work.title} is now deleted."
       redirect_to works_path
     end
 
@@ -75,4 +73,9 @@ class WorksController < ApplicationController
   def work_params
     return params.require(:work).permit(:category, :title, :creator, :pub_year, :description, :votes)
   end
+
+  def find_work
+    @work = Work.find_by(id: params[:id])
+  end
+
 end
