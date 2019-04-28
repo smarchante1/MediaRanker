@@ -1,4 +1,21 @@
-<header>
-  <h3>User Summary: <%= @current_user.username %> </h3>
-  <h5>Joined Site </h5>
-</header> 
+
+<main>
+  <header>
+    <h3>User Summary: <%= @current_user.username %> </h3>
+    <p>Joined Site <%= @current_user.created_at.strftime('%b %d, %Y') %> </p>
+  </header> 
+
+  <h4>Votes</h4>
+
+  <table class="table">
+  <tr>
+    <th>Media Title</th>
+    <th>Created By</th>
+    <th>Published</th>
+    <th>Category</th>
+    <th>Voted On</th>
+  </tr>
+
+   <% @work = Work.find_by(id: params[:id]) %>
+
+</main>
