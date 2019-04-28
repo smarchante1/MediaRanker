@@ -25,21 +25,27 @@ describe UsersController do
     end
   end
 
+  describe "logout action" do
+
+
+  end
+
   describe "current action" do 
     it "responds with success if a user is logged in" do
-      perform_login
+      user_id = users(:one).id
       
-      get current_user_path
+      get user_path(user_id)
 
       must_respond_with :success
     end
 
-    it "responds with a redirect if no user is logged in" do
-      get current_user_path
+    # it "responds with a redirect if no user is logged in" do
 
-      must_respond_with :redirect
+    #   get user_path
 
-    end
+    #   must_respond_with :redirect
+
+    # end
 
     it "gets to the current user page" do
       test_user = {

@@ -28,34 +28,32 @@ class UsersController < ApplicationController
   end
 
   def current
-    @current_user = User.find_by(id: session[:user_id])
-    unless @current_user
+    unless @user
       flash.now[:error] = "You must be logged in to do that."
       redirect_to root_path
     end
   end
 
   def logout
-    current_user = User.find_by(id: session[:user_id])
     session[:user_id] = nil
-    flash[:notice] = "Logged out #{current_user.username}"
+    flash[:notice] = "Logged out"
     redirect_to root_path
   end
 
   def upvote
-    current_user = User.find_by(id: session[:user_id])
+    user = User.find_by(id: session[:user_id])
 
-    unless current_user
+    unless user
       flash[:status] = :error
       flash[:message] = "Must be logged in to vote!"
       redirect_to works_path
     else
       @work = Work.find_by(id: params[:id])
-      if current_user.voted_for? @work
+      if user.voted_for? @work
       flash[:error] = "Cannot upvote the same media twice."
       redirect_to works_path
       else
-        if @work.upvote_by current_user
+        if @work.upvote_by user
           flash[:success] = "Successfully voted for #{@work.title}"
           redirect_to work_path(@work.id)
         else

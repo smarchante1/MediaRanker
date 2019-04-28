@@ -1,7 +1,7 @@
 class Work < ApplicationRecord
   validates :title, presence: true
   acts_as_votable
-  
+
   has_many :users, through: :votes
   has_many :votes
 
@@ -18,6 +18,5 @@ class Work < ApplicationRecord
     top_work = Work.order(cached_votes_total: :desc).first
     top_work
   end
-
 
 end
