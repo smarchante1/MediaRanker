@@ -11,6 +11,24 @@ describe WorksController do
       must_respond_with :success
       
     end
+
+    it "will render regardless of having no media" do
+      Work.destroy_all
+
+      get works_path
+
+      must_respond_with :success
+      
+    end
+  end
+
+  describe "new action" do
+    it "renders form to add new work" do
+      get new_work_path
+
+      must_respond_with :success
+    end
+
   end
 
   describe "show action" do
@@ -39,7 +57,7 @@ describe WorksController do
 
   describe "create action" do
     it "successfully creates a new media" do 
-      media_params = {
+      work_params = {
         "work": {
           category: "book",
           title: "1984",
@@ -50,17 +68,17 @@ describe WorksController do
       }
 
       expect {
-        post works_path, params: media_params
+        post works_path, params: work_params
       }.must_change "Work.count", 1
 
       must_respond_with :redirect
-      new_media = Work.find_by(title: media_params[:work][:title])
+      new_media = Work.find_by(title: work_params[:work][:title])
       expect(flash[:success]).must_equal  "#{new_media.title} was successfully created."
       must_redirect_to work_path(new_media.id)
     end
 
     it "will give a 404 for bad parameters" do
-      media_params = {
+      work_params = {
         "work": {
           category: "book",
           title: "",
@@ -71,7 +89,7 @@ describe WorksController do
       }
 
       expect {
-        post works_path, params: media_params
+        post works_path, params: work_params
       }.wont_change "Work.count" 
 
       must_respond_with :bad_request
@@ -94,7 +112,8 @@ describe WorksController do
 
     describe "update action" do
       it "can update an existing work" do
-        media_params = {
+
+        update_params = {
           work: {
             category: "album",
             title: "Electric Gypsy",
@@ -105,7 +124,7 @@ describe WorksController do
         }
 
         expect {
-          patch work_path(work_2.id), params: media_params
+          patch work_path(work_2.id), params: update_params
         }.wont_change "Work.count"
 
         must_respond_with :redirect
@@ -113,10 +132,11 @@ describe WorksController do
         expect(flash[:success]).must_equal "Successfully updated #{work_2.title}"
       end
 
-      # USE LET FOR THIS TEST
       # it "returns 404 for invalid  work" do
- 
-      #   patch work_path(-1)
+      #   work_2
+
+      #   work_id = Work.last.id + 1
+      #   patch work_path(work_id), params: update_params
 
       #   must_respond_with :not_found
       # end
