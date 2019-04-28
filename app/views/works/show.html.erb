@@ -17,8 +17,11 @@
   <td><%= @work.cached_votes_total%> votes for this <%= @work.category %></td>
 </h3>
 
-<% voters = @work.votes_for.includes(:voter).map do |vote|
+<% @voters = @work.votes_for.includes(:voter).map do |vote|
      { voter_name: vote.voter.username, updated_at: vote.updated_at.strftime('%b %d, %Y') }
 end %>
 
-<%= voters %>
+<%= table_for @voters do |table| %>
+  <% table.column :voter_name %>
+  <% table.column :updated_at %>
+<% end %>
