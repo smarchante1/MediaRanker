@@ -7,7 +7,7 @@
     <th>Upvote</th>
   </tr>
 
-  <% works.each do |work| %>
+  <% Work.order(cached_votes_total: :desc).each do |work| %>
   <tr>
     <td>
        <%= work.cached_votes_total %>
