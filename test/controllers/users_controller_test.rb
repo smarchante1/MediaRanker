@@ -9,7 +9,37 @@ describe UsersController do
     must_respond_with :success
   end
 
+  describe "index action" do
+    it "displays all users" do
+      get users_path
+
+      must_respond_with :success
+    end
+  end
+
+  describe "show action"  do
+    it "displays an individual user" do
+      valid_user = User.first
+      get user_path(valid_user.id)
+  
+      must_respond_with :success
+    end
+
+    it "returns 404 for invalid user" do
+      get user_path(-1)
+
+      must_respond_with :not_found
+
+    end
+  end
+
   describe "login action" do
+    it "user can log in" do
+      perform_login
+
+      must_redirect_to root_path
+    end
+
     it "flashes success when existing user logs in" do
       test_user = {
         "user": {
@@ -26,7 +56,15 @@ describe UsersController do
   end
 
   describe "logout action" do
+    it "logs a user out" do
+      perform_login
 
+      post logout_path
+
+      expect(session[:user_id] = nil).must_be_nil
+
+      must_redirect_to root_path
+    end
 
   end
 
@@ -38,14 +76,6 @@ describe UsersController do
 
       must_respond_with :success
     end
-
-    # it "responds with a redirect if no user is logged in" do
-
-    #   get user_path
-
-    #   must_respond_with :redirect
-
-    # end
 
     it "gets to the current user page" do
       test_user = {
@@ -60,7 +90,7 @@ describe UsersController do
     end
   end
 
-  describe "vote action" do
+  describe "upvote action" do
     before do
       @work = works(:album_2)
       @user = perform_login
@@ -83,8 +113,9 @@ describe UsersController do
       work_1 = works(:album_2)
 
       post upvote_path(work_1.id)
-
-      # expect(flash[:message]).must_equal "Must be logged in to vote!"
+      
+      # can't get this test to pass
+      # expect(flash[:status]).must_equal "Must be logged in to vote!"
       must_respond_with :redirect
     end
 
