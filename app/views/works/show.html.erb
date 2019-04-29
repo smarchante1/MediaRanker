@@ -5,8 +5,6 @@
 
   <p> Published: <%= @work.pub_year %> </p>
 
-  <p> <%= @work.description %> </p>
-
   <section>
     <%= link_to "Back to media ranks", works_path, class: "btn btn-primary" %>
     <%= link_to "Edit", edit_work_path(@work.id), class: "btn btn-primary" %>
