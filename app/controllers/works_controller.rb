@@ -8,7 +8,6 @@ class WorksController < ApplicationController
   end
 
   def show 
-    # @work = Work.find_by(id: params[:id])
     if @work.nil?
       flash[:failure] = "Your search returned no results."
       redirect_to root_path
@@ -37,14 +36,12 @@ class WorksController < ApplicationController
   end
 
   def edit
-    # @work = Work.find_by(id: params[:id])
     unless @work
       head :not_found
     end
   end
 
   def update
-    # @work = Work.find_by(id: params[:id])
     if @work.update(work_params)
       flash[:success] = "Successfully updated #{@work.title}"
       redirect_to work_path(@work.id)
@@ -56,7 +53,6 @@ class WorksController < ApplicationController
   end
 
   def destroy
-    # work = Work.find_by(id: params[:id])
     if !@work
       flash[:failure] = "Unable to delete the specified media."
       redirect_to root_path
